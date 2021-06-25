@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>HTService</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script
+            src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+            crossorigin="anonymous"
+    ></script>
+    <!-- Google fonts-->
+    <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet"/>
+</head>
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img src="/assets/img/logos/logo.png">득근득근</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            Menu
+            <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/trainerboard">트레이너 찾기</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/trainerboard/save">트레이너 등록</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/board">자유게시판</a>
+                </li>
+                {{#userName}}
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a href="#" class="d-block link-light text-decoration-none dropdown-toggle"
+                               data-bs-toggle="dropdown" aria-expanded="false" id="dropdwonUser1">
+                                <img src="{{userPicture}}" alt="profilePicture" width="32" height="32"
+                                     class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1"
+                                style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 34px)"
+                                data-popper-placement="bottom-end">
+                                <li><a class="dropdown-item" href="/board/save">New post...</a></li>
+                                <li><a class="dropdown-item" href="/mypage/info">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {{/userName}}
+                {{^userName}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                {{/userName}}
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">Welcome To 득근득근!</div>
+        <div class="masthead-heading text-uppercase">
+            최고의 트레이너들을 만나보세요!
+        </div>
+        <a class="btn btn-primary btn-xl text-uppercase" href="/trainerboard"
+        >지금 바로 트레이너 매칭</a
+        >
+    </div>
+</header>
+
+<!-- Portfolio Grid-->
+<section class="page-section bg-light" id="portfolio">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">트레이너 찾기</h2>
+            <h3 class="section-subheading text-muted">
+                클릭만으로 최고의 트레이너를 만나보세요.
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 1-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="#portfolioModal1"
+                    >
+                        <div class="portfolio-hover" onclick="searchHealth()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/health.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">헬스</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Health
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 2-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="#portfolioModal2"
+                    >
+                        <div class="portfolio-hover" onclick="searchYoga()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/yoga.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">요가</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Yoga
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4">
+                <!-- Portfolio item 3-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="/trainerboard"
+                    >
+                        <div class="portfolio-hover" onclick="searchPilates()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x">
+                                </i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/pilates.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">필라테스</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Pilates
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+                <!-- Portfolio item 4-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="#portfolioModal4"
+                    >
+                        <div class="portfolio-hover" onclick="searchBulkUp()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/bulkup.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">벌크업</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Bulk Up
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                <!-- Portfolio item 5-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="#portfolioModal5"
+                    >
+                        <div class="portfolio-hover" onclick="searchDiet()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/diet.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">다이어트</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Diet
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <!-- Portfolio item 6-->
+                <div class="portfolio-item">
+                    <a
+                            class="portfolio-link"
+                            data-bs-toggle="modal"
+                            href="#portfolioModal6"
+                    >
+                        <div class="portfolio-hover" onclick="searchBodyProfile()">
+                            <div class="portfolio-hover-content">
+                                <i class="fas fa-search fa-3x"></i>
+                            </div>
+                        </div>
+                        <img
+                                class="img-fluid"
+                                src="assets/img/portfolio/bodyprofile.jpg"
+                                alt="..."
+                        />
+                    </a>
+                    <div class="portfolio-caption">
+                        <div class="portfolio-caption-heading">바디프로필</div>
+                        <div class="portfolio-caption-subheading text-muted">
+                            Body Profile
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- About-->
+<section class="page-section" id="about">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">About</h2>
+            <h3 class="section-subheading text-muted">
+                HTService founder history.
+            </h3>
+        </div>
+        <ul class="timeline">
+            <li>
+                <div class="timeline-image">
+                    <img
+                            class="rounded-circle img-fluid"
+                            src="assets/img/about/1.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>2009-2011</h4>
+                        <h4 class="subheading">Our Humble Beginnings</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">
+                            HTService started at bit-academy project for
+                            java web service backend developer. we gathered
+                            together radomly. but all students have eager to
+                            be a skilled backend developer.
+
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image">
+                    <img
+                            class="rounded-circle img-fluid"
+                            src="assets/img/about/2.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>March 2011</h4>
+                        <h4 class="subheading">An Agency is Born</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">
+                            sangwon, ran, beomsoo and yongchan were team.
+                            and considered what kind of service will be used in covid-19.
+                            we decided to make a service about home-gym service.
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="timeline-image">
+                    <img
+                            class="rounded-circle img-fluid"
+                            src="assets/img/about/3.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>December 2015</h4>
+                        <h4 class="subheading">Transition to Full Service</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">
+                            for 3 months, we use all skills which we have learned for 3 months.
+                            It takes 6 months to make a our home-gym service.
+                            It was hard time to us but we made it!
+
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image">
+                    <img
+                            class="rounded-circle img-fluid"
+                            src="assets/img/about/4.jpg"
+                            alt="..."
+                    />
+                </div>
+                <div class="timeline-panel">
+                    <div class="timeline-heading">
+                        <h4>July 2020</h4>
+                        <h4 class="subheading">Phase Two Expansion</h4>
+                    </div>
+                    <div class="timeline-body">
+                        <p class="text-muted">
+                            HTService which is name of our home-gym service have a great success.
+                            and we made 2 branches.
+                        </p>
+                    </div>
+                </div>
+            </li>
+            <li class="timeline-inverted">
+                <div class="timeline-image">
+                    <h4>
+                        Be Part
+                        <br/>
+                        Of Our
+                        <br/>
+                        Story!
+                    </h4>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- Team-->
+<section class="page-section bg-light" id="team">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+            <h3 class="section-subheading text-muted">
+                Lorem ipsum dolor sit amet consectetur.
+            </h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img
+                            class="mx-auto rounded-circle"
+                            src="assets/img/team/1.jpg"
+                            alt="..."
+                    />
+                    <h4>BeomSoo Kim</h4>
+                    <p class="text-muted">Front Application Developer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-facebook-f"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img
+                            class="mx-auto rounded-circle"
+                            src="assets/img/team/2.jpg"
+                            alt="..."
+                    />
+                    <h4>Ran Kook</h4>
+                    <p class="text-muted">Backend Application Developer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-facebook-f"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="team-member">
+                    <img
+                            class="mx-auto rounded-circle"
+                            src="assets/img/team/3.jpg"
+                            alt="..."
+                    />
+                    <h4>SangWon Hwang</h4>
+                    <p class="text-muted">Backend Application Developer</p>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-twitter"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-facebook-f"></i
+                    ></a>
+                    <a class="btn btn-dark btn-social mx-2" href="#!"
+                    ><i class="fab fa-linkedin-in"></i
+                    ></a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut
+                    eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam
+                    corporis ea, alias ut unde.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Clients-->
+<div class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"
+                ><img
+                        class="img-fluid img-brand d-block mx-auto"
+                        src="assets/img/logos/microsoft.svg"
+                        alt="..."
+                /></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"
+                ><img
+                        class="img-fluid img-brand d-block mx-auto"
+                        src="assets/img/logos/google.svg"
+                        alt="..."
+                /></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"
+                ><img
+                        class="img-fluid img-brand d-block mx-auto"
+                        src="assets/img/logos/facebook.svg"
+                        alt="..."
+                /></a>
+            </div>
+            <div class="col-md-3 col-sm-6 my-3">
+                <a href="#!"
+                ><img
+                        class="img-fluid img-brand d-block mx-auto"
+                        src="assets/img/logos/ibm.svg"
+                        alt="..."
+                /></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact-->
+
+<!-- Footer-->
+<footer class="footer py-4 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start">
+                Copyright &copy; 득근득근 2021
+            </div>
+            <div class="col-lg-4 my-3 my-lg-0">
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-twitter"></i
+                ></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a class="link-dark text-decoration-none me-3" href="#!"
+                >Privacy Policy</a
+                >
+                <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--index.js 추가-->
+<script src="/js/app/index.js"></script>
+<script src="/js/app/select.js"></script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <title>게시판 - 글쓰기</title>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+            crossorigin="anonymous"
+    />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script
+            src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+            crossorigin="anonymous">
+    </script>
+    <!-- Google fonts-->
+    <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+            rel="stylesheet"
+            type="text/css"
+    />
+
+    <style>
+        textarea.form-control {
+            height: 300px;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 770px;;
+        }
+    </style>
+    <link href="../css/styles.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/"><img src="/assets/img/logos/logo.png">득근득근</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            Menu
+            <i class="fas fa-bars ms-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/trainerboard">트레이너 찾기</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/trainerboard/save">트레이너 등록</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/board">자유게시판</a>
+                </li>
+                {{#userName}}
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a href="#" class="d-block link-light text-decoration-none dropdown-toggle"
+                               data-bs-toggle="dropdown" aria-expanded="false" id="dropdownUser1">
+                                <img src="{{userPicture}}" alt="profilePicture" width="32" height="32"
+                                     class="rounded-circle">
+                            </a>
+                            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1"
+                                style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 34px)"
+                                data-popper-placement="bottom-end">
+                                <li><a class="dropdown-item" href="/board/save">New post...</a></li>
+                                <li><a class="dropdown-item" href="/mypage/info">Profile</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {{/userName}}
+                {{^userName}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">로그인</a>
+                    </li>
+                {{/userName}}
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead" style="background-image: url(../assets/img/boardimage.jpg);">
+    <div class="container">
+        <div class="masthead-heading text-uppercase">
+            Board
+        </div>
+    </div>
+</header>
+
+<section class="page-section" id="board">
+    <div class="container">
+        <div class="board_wrap">
+            <div class="board_list_wrap">
+                <table class="table table-horizontal table-bordered">
+                    <thead class="thead-strong">
+                    <tr>
+                        <th class="num">번호</th>
+                        <th class="title">제목</th>
+                        <th class="author">작성자</th>
+                        <th class="date">작성일</th>
+                        <th class="count">조회</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    {{#searchList}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td><a href="/board/{{id}}">{{title}}</a></td>
+                            <td>{{user.nickName}}</td>
+                            <td>{{createdDate}}</td>
+                            <td>{{viewCount}}</td>
+                        </tr>
+                    {{/searchList}}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 " style="display: flex; justify-content: space-between">
+        <form class="" action="/board/search" method="GET">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <input name="keyword" type="text" placeholder="검색어를 입력해주세요"/>
+                <button class="btn btn-warning">검색</button>
+            </div>
+        </form>
+        {{#userName}}
+        <div>
+            <a href="/board/save">
+                <button type="button" class="btn btn-outline-warning ">
+                    글쓰기
+                </button>
+            </a>
+        </div>
+        {{/userName}}
+    </div>
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="?page={{prev}}">이전</a></li>
+        {{#check}}
+            <li class="page-item"><a class="page-link" href="?page={{next}}">다음</a></li>
+        {{/check}}
+        {{^check}}
+            <li class="page-item disabled"><a class="page-link" href="?page={{next}}">다음</a></li>
+        {{/check}}
+    </ul>
+</section>
+<!-- Footer-->
+<footer class="footer py-4 bg-light mt-auto">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start">
+                Copyright &copy; Fitness 9.9 2021
+            </div>
+            <div class="col-lg-4 my-3 my-lg-0">
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-twitter"></i
+                ></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-facebook-f"></i
+                ></a>
+                <a class="btn btn-dark btn-social mx-2" href="#!"
+                ><i class="fab fa-linkedin-in"></i
+                ></a>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a class="link-dark text-decoration-none me-3" href="#!"
+                >Privacy Policy</a
+                >
+                <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<!--index.js 추가-->
+<script src="../js/app/index.js"></script>
+<script src="../js/app/select.js"></script>
+</body>
+</html>

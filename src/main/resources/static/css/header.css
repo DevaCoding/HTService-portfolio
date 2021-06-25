@@ -1,0 +1,83 @@
+header body {
+  font-family: "Source Sans Pro";
+}
+#header {
+  position: fixed;
+}
+.navbar {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 8px 12px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: gray;
+}
+.navbar_menu {
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+}
+
+.navbar_menu li {
+  padding: 8px 12px;
+}
+
+.navbar_right {
+  display: flex;
+  list-style: none;
+}
+.navbar_right li {
+  margin-right: 60px;
+}
+.navbar_Btn {
+  display: none;
+  position: absolute;
+  left: 32px;
+  font-size: 40px;
+  color: aquamarine;
+}
+.navbar_Lbtn {
+  display: none;
+  position: absolute;
+  right: 32px;
+  font-size: 40px;
+}
+
+@media screen and (max-width: 800px) {
+  * {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .navbar_logo {
+    flex-direction: column;
+  }
+  .navbar_menu {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+  .navbar_right {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .navbar_Btn {
+    display: block;
+  }
+  .navbar_Lbtn {
+    display: block;
+  }
+  .navbar_menu.active {
+    display: flex;
+  }
+  .navbar_right.pass {
+    display: flex;
+  }
+}
